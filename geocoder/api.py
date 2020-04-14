@@ -10,7 +10,7 @@ from geocoder.arcgis import ArcgisQuery
 from geocoder.baidu import BaiduQuery
 from geocoder.bing import BingQuery, BingQueryDetail
 from geocoder.canadapost import CanadapostQuery
-from geocoder.freegeoip import FreeGeoIPQuery
+from geocoder.ipstack import IpStackQuery
 from geocoder.gaode import GaodeQuery
 from geocoder.geocodefarm import GeocodeFarmQuery
 from geocoder.geolytica import GeolyticaQuery
@@ -111,7 +111,7 @@ options = {
         'children': GeonamesChildren,
         'hierarchy': GeonamesHierarchy
     },
-    'freegeoip': {'geocode': FreeGeoIPQuery},
+    'ipstack': {'geocode': IpStackQuery},
     'w3w': {
         'geocode': W3WQuery,
         'reverse': W3WReverse,
@@ -478,14 +478,14 @@ def ipinfo(location='', **kwargs):
     return get(location, provider='ipinfo', **kwargs)
 
 
-def freegeoip(location, **kwargs):
-    """FreeGeoIP Provider
+def ipstack(location, **kwargs):
+    """IPStack Provider
 
     :param ``location``: Your search IP Address you want geocoded.
     :param ``location``: (optional) if left blank will return your
                                 current IP address's location.
     """
-    return get(location, provider='freegeoip', **kwargs)
+    return get(location, provider='ipstack', **kwargs)
 
 
 def ip(location, **kwargs):
