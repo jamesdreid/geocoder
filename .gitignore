@@ -29,3 +29,4 @@ t.py
 t2.py
 dist
 .pypirc
+/venv/
