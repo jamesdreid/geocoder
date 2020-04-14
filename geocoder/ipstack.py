@@ -11,6 +11,8 @@ from geocoder.keys import ipstack_key
 from geocoder.base import OneResult, MultipleResultsQuery
 
 
+
+
 class IPStackResult(OneResult):
 
     @property
@@ -35,62 +37,78 @@ class IPStackResult(OneResult):
     def postal(self):
         zip_code = self.raw.get('zip_code')
         postal_code = self.raw.get('postal_code')
+        zip = self.raw.get('zip')
         if zip_code:
             return zip_code
         if postal_code:
             return postal_code
+        if zip:
+            return zip
 
     @property
     def city(self):
         return self.raw.get('city')
 
     @property
+    def type(self):
+        return self.raw.get('type')
+
+    @property
     def state(self):
-        return self.raw.get('region')
+        return self.raw.get('region_code')
+
+    @property
+    def state_name(self):
+        return self.raw.get('region_name')
 
     @property
     def region_code(self):
         return self.raw.get('region_code')
 
     @property
+    def region_name(self):
+        return self.raw.get('region_name')
+
+    @property
     def country(self):
         return self.raw.get('country_name')
 
     @property
-    def country_code3(self):
-        return self.raw.get('country_code3')
+    def country_code(self):
+        return self.raw.get('country_code')
 
     @property
-    def continent(self):
-        return self.raw.get('continent')
+    def continent_code(self):
+        return self.raw.get('continent_code')
 
     @property
-    def timezone(self):
-        return self.raw.get('timezone')
-
-    @property
-    def area_code(self):
-        return self.raw.get('area_code')
-
-    @property
-    def dma_code(self):
-        return self.raw.get('dma_code')
-
-    @property
-    def offset(self):
-        return self.raw.get('offset')
-
-    @property
-    def organization(self):
-        return self.raw.get('organization')
+    def continent_name(self):
+        return self.raw.get('continent_name')
 
     @property
     def ip(self):
         return self.raw.get('ip')
 
     @property
-    def time_zone(self):
-        return self.raw.get('time_zone')
+    def location_data(self):
+        return self.raw.get('location')
+
+    @property
+    def geoname_id(self):
+        _location_data = self.raw.get('location')
+        if _location_data:
+            geoname_id = _location_data['geoname_id']
+            return geoname_id
+
+    @property
+    def capital(self):
+        _location_data = self.raw.get('location')
+        if _location_data:
+            capital = _location_data['capital']
+            return capital
+
+
+
 
 
 class IpStackQuery(MultipleResultsQuery):
